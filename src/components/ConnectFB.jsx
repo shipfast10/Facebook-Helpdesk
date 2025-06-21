@@ -5,12 +5,15 @@ function ConnectFB() {
     const [pageInfo, setPageInfo] = useState(null);
 
     useEffect(() => {
-        if (!window.FB) {
-            const script = document.createElement("script");
-            script.src = "https://connect.facebook.net/en_US/sdk.js";
-            script.async = true;
-            script.defer = true;
-            script.onload = () => {
+        const loadFBSDK = () => {
+            if (window.FB) {
+                console.log("✅ FB SDK already available");
+                setSdkReady(true);
+                return;
+            }
+
+            window.fbAsyncInit = function () {
+                console.log("⚙️ FB SDK Init");
                 window.FB.init({
                     appId: "749418387435290",
                     cookie: true,
@@ -19,28 +22,38 @@ function ConnectFB() {
                 });
                 setSdkReady(true);
             };
+
+            const script = document.createElement("script");
+            script.src = "https://connect.facebook.net/en_US/sdk.js";
+            script.async = true;
+            script.defer = true;
+            script.crossOrigin = "anonymous";
             document.body.appendChild(script);
-        } else {
-            setSdkReady(true);
-        }
+        };
+
+        loadFBSDK();
     }, []);
 
     const handleFBLogin = () => {
-        if (!sdkReady) return alert("Facebook SDK not ready");
+        if (!window.FB) return alert("Facebook SDK not loaded yet");
+        if (!sdkReady) return alert("Facebook SDK not initialized");
 
         window.FB.login(
             (response) => {
+                console.log("🔐 FB Login response:", response);
+
                 if (!response.authResponse) {
                     alert("Facebook login failed.");
                     return;
                 }
 
                 window.FB.api("/me/accounts", (res) => {
+                    console.log("📘 Page info:", res);
+
                     if (res.data && res.data.length > 0) {
                         const selectedPage = res.data[0];
                         setPageInfo(selectedPage);
 
-                        // Send to backend (updated URL)
                         fetch(`${import.meta.env.VITE_API_URL}/api/connect`, {
                             method: "POST",
                             headers: {
@@ -53,18 +66,21 @@ function ConnectFB() {
                             }),
                         })
                             .then((res) => res.json())
-                            .then((data) =>
-                                alert("✅ Connected to: " + selectedPage.name)
-                            )
-                            .catch((err) => alert("Failed to connect to backend."));
+                            .then((data) => {
+                                console.log("✅ Connected to backend:", data);
+                                alert("✅ Connected to: " + selectedPage.name);
+                            })
+                            .catch((err) => {
+                                console.error("❌ Backend connect error", err);
+                                alert("Failed to connect to backend.");
+                            });
                     } else {
                         alert("No pages found.");
                     }
                 });
             },
             {
-                scope:
-                    "pages_show_list,pages_messaging,email,public_profile,pages_read_engagement",
+                scope: "pages_show_list,pages_messaging,email,public_profile,pages_read_engagement",
             }
         );
     };
