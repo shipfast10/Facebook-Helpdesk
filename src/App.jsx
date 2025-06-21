@@ -1,21 +1,17 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Register from "./components/Register";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
-import ConnectFb from "./components/ConnectFb";
-import Conversations from "./components/Conversations";
-import Disconnect from "./components/Disconnect";
-import './App.css';
+import Register from "./components/Register";
+import ConnectFB from "./components/ConnectFb";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/connect" element={<ConnectFB />} />
-        <Route path="/conversations" element={<Conversations />} />
-        <Route path="/disconnect" element={<Disconnect />} />
       </Routes>
     </Router>
   );
