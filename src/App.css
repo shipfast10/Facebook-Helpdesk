@@ -1,0 +1,180 @@
+/* src/App.css */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0053a0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 560px;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 30px 70px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-box h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #111;
+  text-align: center;
+}
+
+.auth-box input[type="text"],
+.auth-box input[type="email"],
+.auth-box input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background-color: #fff;
+  color: #333;
+  text-align: left;
+}
+
+.auth-box input[type="text"]::placeholder,
+.auth-box input[type="email"]::placeholder,
+.auth-box input[type="password"]::placeholder {
+  color: #888;
+}
+
+.checkbox-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color: #000;
+}
+
+.checkbox-row input[type="checkbox"] {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.auth-box button {
+  width: 100%;
+  background-color: #0053a0;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-top: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.auth-box button:hover {
+  background-color: #003c7d;
+}
+
+.auth-box p {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.auth-box a {
+  color: #0053a0;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.connect-container {
+  background-color: white;
+  color: black;
+}
+
+.disconnect-container {
+  color: black;
+  background-color: white;
+}
+
+.connect-container,
+.disconnect-container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 40px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.connect-container button,
+.disconnect-container button {
+  background-color: #1877f2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.conversation-screen {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 20%;
+  background: #fff;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.chat-window {
+  width: 60%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.messages {
+  flex-grow: 1;
+  margin-bottom: 10px;
+}
+
+.chat-window input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.profile-pane {
+  width: 20%;
+  background: #fff;
+  padding: 20px;
+  border-left: 1px solid #ccc;
+}
