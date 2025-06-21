@@ -15,7 +15,7 @@ function ConnectFB() {
                     appId: "749418387435290",
                     cookie: true,
                     xfbml: true,
-                    version: "v18.0",
+                    version: "v17.0",
                 });
                 setSdkReady(true);
             };
