@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Login from "./components/Login";
 import Register from "./components/Register";
 import ConnectFB from "./components/ConnectFB";
+import Inbox from "./components/Inbox";
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/connect" element={<ConnectFB />} />
+        <Route path="/inbox" element={<Inbox />} />
       </Routes>
     </Router>
   );
