@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 function ConnectFB() {
     useEffect(() => {
-        window.FBAsyncInit = function () {
+        window.fbAsyncInit = function () {
             window.FB.init({
                 appId: "749418387435290",
                 cookie: true,
