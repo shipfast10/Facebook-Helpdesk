@@ -4,35 +4,45 @@ function ConnectFB() {
     const [sdkReady, setSdkReady] = useState(false);
 
     useEffect(() => {
-        // Load SDK only if not already loaded
+        // Only add if not already loaded
         if (!window.FB) {
             const script = document.createElement("script");
             script.id = "facebook-jssdk";
             script.src = "https://connect.facebook.net/en_US/sdk.js";
             script.async = true;
+            script.defer = true;
+
             script.onload = () => {
-                // After script loads, init SDK
-                window.FB.init({
-                    appId: "749418387435290",
-                    cookie: true,
-                    xfbml: true,
-                    version: "v18.0",
-                });
-                console.log("✅ FB SDK Initialized");
-                setSdkReady(true);
+                if (window.FB) {
+                    window.FB.init({
+                        appId: "749418387435290",
+                        cookie: true,
+                        xfbml: true,
+                        version: "v18.0", // ✅ REQUIRED! must be a valid version
+                    });
+                    console.log("✅ FB SDK Initialized");
+                    setSdkReady(true);
+                } else {
+                    console.error("❌ FB object not found after SDK load");
+                }
             };
-            script.onerror = () => {
-                console.error("❌ Failed to load FB SDK");
-            };
+
             document.body.appendChild(script);
         } else {
+            // FB already loaded
+            window.FB.init({
+                appId: "749418387435290",
+                cookie: true,
+                xfbml: true,
+                version: "v18.0",
+            });
             setSdkReady(true);
         }
     }, []);
 
     const handleFBConnect = () => {
         if (!sdkReady || !window.FB) {
-            alert("Facebook SDK not loaded yet. Please wait a moment.");
+            alert("Facebook SDK not loaded yet. Please wait...");
             return;
         }
 
