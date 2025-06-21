@@ -9,19 +9,24 @@ function Login() {
     const handleLogin = async () => {
         console.log("Logging in...");
 
-        const response = await fetch("http://localhost:5000/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
-        });
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
 
-        const data = await response.json();
-        console.log("API response:", data);
+            const data = await response.json();
+            console.log("API response:", data);
 
-        if (data.success) {
-            navigate("/connect");
-        } else {
-            alert(data.message || "Login failed");
+            if (data.status === "logged_in") {
+                navigate("/connect");
+            } else {
+                alert(data.error || "Login failed");
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            alert("Server error");
         }
     };
 

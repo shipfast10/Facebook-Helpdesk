@@ -9,7 +9,7 @@ function Register() {
 
     const handleRegister = async () => {
         console.log("Registering...");
-        const response = await fetch("http://localhost:5000/api/register", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password })
@@ -18,12 +18,13 @@ function Register() {
         const data = await response.json();
         console.log("API response:", data);
 
-        if (data.success) {
+        if (data.status === "registered") {
             navigate("/"); // Go to login page
         } else {
             alert(data.message || "Registration failed");
         }
     };
+
 
     return (
         <div className="auth-wrapper">

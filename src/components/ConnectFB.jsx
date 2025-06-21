@@ -35,14 +35,13 @@ function ConnectFB() {
                     return;
                 }
 
-                // Get page info
                 window.FB.api("/me/accounts", (res) => {
                     if (res.data && res.data.length > 0) {
-                        const selectedPage = res.data[0]; // auto select first page for now
+                        const selectedPage = res.data[0];
                         setPageInfo(selectedPage);
 
-                        // Send to backend
-                        fetch("http://localhost:5000/api/connect", {
+                        // Send to backend (updated URL)
+                        fetch(`${import.meta.env.VITE_API_URL}/api/connect`, {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
@@ -54,7 +53,10 @@ function ConnectFB() {
                             }),
                         })
                             .then((res) => res.json())
-                            .then((data) => alert("✅ Connected to: " + selectedPage.name));
+                            .then((data) =>
+                                alert("✅ Connected to: " + selectedPage.name)
+                            )
+                            .catch((err) => alert("Failed to connect to backend."));
                     } else {
                         alert("No pages found.");
                     }
@@ -69,7 +71,7 @@ function ConnectFB() {
 
     const handleDisconnect = () => {
         setPageInfo(null);
-        fetch("http://localhost:5000/api/disconnect", { method: "POST" });
+        fetch(`${import.meta.env.VITE_API_URL}/api/disconnect`, { method: "POST" });
         alert("Disconnected");
     };
 
