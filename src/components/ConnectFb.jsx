@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 function ConnectFb() {
     useEffect(() => {
-        window.fbAsyncInit = function () {
+        window.FbAsyncInit = function () {
             window.Fb.init({
                 appId: "749418387435290",
                 cookie: true,
@@ -12,7 +12,7 @@ function ConnectFb() {
         };
     }, []);
 
-    const handleFBConnect = () => {
+    const handleFbConnect = () => {
         if (!window.Fb) {
             alert("Facebook SDK not loaded");
             return;
