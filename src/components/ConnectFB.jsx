@@ -5,34 +5,53 @@ function ConnectFB() {
     const [pageInfo, setPageInfo] = useState(null);
 
     useEffect(() => {
-        const loadFBSDK = () => {
+        const loadFacebookSDK = () => {
             if (window.FB) {
-                console.log("✅ FB SDK already available");
-                setSdkReady(true);
+                console.log("✅ FB SDK already exists");
+                try {
+                    window.FB.init({
+                        appId: "749418387435290",
+                        cookie: true,
+                        xfbml: true,
+                        version: "v17.0",
+                    });
+                    console.log("✅ FB.init successful");
+                    setSdkReady(true);
+                } catch (e) {
+                    console.error("❌ FB.init failed:", e);
+                }
                 return;
             }
-
-            window.fbAsyncInit = function () {
-                console.log("⚙️ FB SDK Init");
-                window.FB.init({
-                    appId: "749418387435290",
-                    cookie: true,
-                    xfbml: true,
-                    version: "v17.0",
-                });
-                setSdkReady(true);
-            };
 
             const script = document.createElement("script");
             script.src = "https://connect.facebook.net/en_US/sdk.js";
             script.async = true;
             script.defer = true;
-            script.crossOrigin = "anonymous";
+            script.onload = () => {
+                if (window.FB) {
+                    try {
+                        window.FB.init({
+                            appId: "749418387435290",
+                            cookie: true,
+                            xfbml: true,
+                            version: "v17.0",
+                        });
+                        console.log("✅ FB.init after load");
+                        setSdkReady(true);
+                    } catch (e) {
+                        console.error("❌ FB.init error after load:", e);
+                    }
+                } else {
+                    console.error("❌ FB not available after SDK load");
+                }
+            };
+
             document.body.appendChild(script);
         };
 
-        loadFBSDK();
+        loadFacebookSDK();
     }, []);
+
 
     const handleFBLogin = () => {
         if (!window.FB) return alert("Facebook SDK not loaded yet");
