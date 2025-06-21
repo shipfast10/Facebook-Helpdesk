@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 
-function ConnectFb() {
+function ConnectFB() {
     useEffect(() => {
-        window.FbAsyncInit = function () {
-            window.Fb.init({
+        window.FBAsyncInit = function () {
+            window.FB.init({
                 appId: "749418387435290",
                 cookie: true,
                 xfbml: true,
@@ -12,13 +12,13 @@ function ConnectFb() {
         };
     }, []);
 
-    const handleFbConnect = () => {
-        if (!window.Fb) {
+    const handleFBConnect = () => {
+        if (!window.FB) {
             alert("Facebook SDK not loaded");
             return;
         }
 
-        window.Fb.login(
+        window.FB.login(
             (response) => {
                 console.log("FB login response:", response);
                 if (response.authResponse) {
@@ -36,9 +36,9 @@ function ConnectFb() {
     return (
         <div className="connect-container" style={{ color: "#000" }}>
             <h2>Facebook Page Integration</h2>
-            <button onClick={handleFbConnect}>Connect with Facebook</button>
+            <button onClick={handleFBConnect}>Connect with Facebook</button>
         </div>
     );
 }
 
-export default ConnectFb;
+export default ConnectFB;
