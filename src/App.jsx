@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import ConnectFB from "./components/ConnectFB";
+import ConnectFb from "./components/ConnectFb";
 import Conversations from "./components/Conversations";
 import Disconnect from "./components/Disconnect";
 import './App.css';
