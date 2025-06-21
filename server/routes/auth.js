@@ -1,35 +1,24 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
+const express = require("express");
 const router = express.Router();
 
-const filePath = path.join(__dirname, '../data/users.json');
+// TEMP in-memory user store
+let users = [];
 
-// Ensure file exists
-if (!fs.existsSync(filePath)) fs.writeFileSync(filePath, '[]');
-
-// Register
-router.post('/register', (req, res) => {
+router.post("/register", (req, res) => {
     const { name, email, password } = req.body;
-    let users = JSON.parse(fs.readFileSync(filePath));
-
-    if (users.find(u => u.email === email)) {
-        return res.json({ success: false, message: 'User already exists' });
+    if (users.find((u) => u.email === email)) {
+        return res.status(400).json({ error: "User already exists" });
     }
-
     users.push({ name, email, password });
-    fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
-    res.json({ success: true });
+    console.log("✅ Registered:", name);
+    res.json({ status: "registered" });
 });
 
-// Login
-router.post('/login', (req, res) => {
+router.post("/login", (req, res) => {
     const { email, password } = req.body;
-    let users = JSON.parse(fs.readFileSync(filePath));
-
-    const user = users.find(u => u.email === email && u.password === password);
-    if (user) res.json({ success: true });
-    else res.json({ success: false, message: 'Invalid credentials' });
+    const user = users.find((u) => u.email === email && u.password === password);
+    if (!user) return res.status(401).json({ error: "Invalid credentials" });
+    res.json({ status: "logged_in", user: { name: user.name, email: user.email } });
 });
 
 module.exports = router;
