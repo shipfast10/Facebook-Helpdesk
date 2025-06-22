@@ -1,166 +1,165 @@
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f7f9fb;
-    color: #1c1e21;
-    /* Set default font color to dark gray */
-}
-
 .inbox-container {
     display: flex;
     height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+    color: #111;
 }
 
 .sidebar {
     width: 260px;
-    background-color: #fff;
-    border-right: 1px solid #ddd;
+    background-color: #f9fafb;
+    border-right: 1px solid #eee;
     padding: 20px;
 }
 
 .sidebar h3 {
     font-size: 18px;
-    font-weight: 600;
     margin-bottom: 20px;
-    color: #1c1e21;
 }
 
-.conversation-item {
+.conversation {
     padding: 12px;
-    margin-bottom: 10px;
+    background-color: #f1f5f9;
     border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
     cursor: pointer;
-    background-color: #f0f4ff;
 }
 
-.conversation-item.inactive {
-    background-color: #f7f9fb;
+.conversation.active {
+    background-color: #e9f0ff;
 }
 
-.conversation-item:hover {
-    background-color: #e4ebf5;
-}
-
-.conversation-item h4 {
-    font-size: 15px;
+.conversation .name {
+    font-weight: bold;
     margin: 0;
-    color: #1c1e21;
 }
 
-.conversation-item span,
-.conversation-item p {
-    font-size: 13px;
-    color: #4a4a4a;
+.conversation .source,
+.conversation .preview {
+    font-size: 12px;
+    color: #555;
+    margin: 2px 0;
 }
 
-.chat-area {
+.conversation .time {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 12px;
+    color: #666;
+}
+
+.messages-section {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background-color: #f7f9fb;
+    background-color: #f7f8f9;
 }
 
-.chat-header {
-    padding: 15px 20px;
-    font-weight: 600;
-    font-size: 16px;
-    color: #1c1e21;
+.messages-header {
+    padding: 16px;
     border-bottom: 1px solid #ddd;
+    font-weight: 600;
 }
 
-.chat-messages {
+.messages {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
 }
 
 .message {
-    background-color: #fff;
-    padding: 10px 15px;
-    border-radius: 12px;
+    margin-bottom: 20px;
     max-width: 60%;
-    margin-bottom: 10px;
-    color: #1c1e21;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.message.agent {
-    background-color: #e8f1ff;
-    margin-left: auto;
+.message.from-user .bubble {
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px 16px;
+    display: inline-block;
+    color: #111;
 }
 
-.chat-input {
+.message.from-agent .bubble {
+    background: #e5f1ff;
+    border-radius: 12px;
+    padding: 10px 16px;
+    display: inline-block;
+    color: #111;
+}
+
+.meta {
+    font-size: 12px;
+    color: #555;
+    margin-top: 4px;
+}
+
+.reply-box {
     padding: 10px 20px;
     border-top: 1px solid #ccc;
     background: #fff;
 }
 
-.chat-input input {
+.reply-box input {
     width: 100%;
     padding: 12px;
-    border-radius: 8px;
     border: 1px solid #ccc;
-    font-size: 14px;
-    color: #1c1e21;
+    border-radius: 8px;
 }
 
 .details-panel {
-    width: 280px;
-    background-color: #fff;
-    border-left: 1px solid #ddd;
+    width: 260px;
+    background-color: #f9fafb;
     padding: 20px;
+    border-left: 1px solid #eee;
+    text-align: center;
 }
 
 .details-panel .avatar {
-    width: 64px;
-    height: 64px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    object-fit: cover;
     margin-bottom: 10px;
 }
 
-.details-panel h4 {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #1c1e21;
-}
-
-.details-panel small {
-    color: #777;
-    font-size: 12px;
+.details-panel .status {
+    font-size: 13px;
+    color: gray;
+    margin: 6px 0 14px;
 }
 
 .details-panel .buttons {
     display: flex;
+    justify-content: center;
     gap: 10px;
-    margin: 15px 0;
+    margin-bottom: 20px;
 }
 
-.details-panel .buttons button {
-    background-color: #000;
-    color: white;
-    padding: 6px 14px;
-    border-radius: 6px;
+.call-btn,
+.profile-btn {
+    background: #111;
+    color: #fff;
+    padding: 6px 12px;
     border: none;
-    cursor: pointer;
-    font-size: 13px;
-}
-
-.details-panel .info-card {
-    background: #f9f9f9;
-    padding: 12px;
-    border-radius: 10px;
-    margin-top: 15px;
-}
-
-.details-panel .info-card p {
+    border-radius: 6px;
     font-size: 14px;
-    color: #1c1e21;
-    margin: 6px 0;
+    cursor: pointer;
 }
 
-.details-panel .info-card a {
+.info-box {
+    font-size: 14px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.info-box p {
+    margin: 12px 0;
+}
+
+.info-box a {
+    color: #4f46e5;
     font-size: 13px;
-    color: #0053a0;
     text-decoration: none;
 }
