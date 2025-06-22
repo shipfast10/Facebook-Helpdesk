@@ -1,110 +1,111 @@
-// src/components/Inbox.jsx
 import React, { useState } from "react";
-import "../App.css";
-
-const mockConversations = [
-    {
-        id: "user1",
-        name: "Amit RG",
-        preview: "Hey There! I probably did one of the best...",
-        type: "Facebook DM",
-        time: "10m",
-        messages: [
-            {
-                from: "user",
-                text: "Is it in stock right now?",
-                time: "Mar 05, 2:22 AM",
-                name: "Amit RG",
-                avatar: "https://i.pravatar.cc/30?img=5",
-            },
-            {
-                from: "agent",
-                text: "We've 3 left in stock!",
-                time: "Mar 05, 2:22 AM",
-                name: "Richard Panel",
-                avatar: "https://i.pravatar.cc/30?img=1",
-            },
-            {
-                from: "agent",
-                text: "If you order before 8PM we can ship it today.",
-                time: "Mar 05, 2:22 AM",
-                name: "Richard Panel",
-                avatar: "https://i.pravatar.cc/30?img=1",
-            },
-        ],
-        email: "amit@richpanel.com",
-        firstName: "Amit",
-        lastName: "RG",
-        avatar: "https://i.pravatar.cc/50?img=5"
-    },
-];
+import "./Inbox.css";
 
 function Inbox() {
-    const [selected, setSelected] = useState(mockConversations[0]);
-    const [input, setInput] = useState("");
+    const [selectedConversation, setSelectedConversation] = useState("Amit RG");
 
     return (
-        <div className="full-inbox-layout">
+        <div className="inbox-container">
             {/* Sidebar */}
             <div className="sidebar">
-                <div className="sidebar-header">
-                    <h3>Conversations</h3>
+                <h3>Conversations</h3>
+                <div
+                    className={`conversation-item ${selectedConversation === "Amit RG" ? "active" : ""
+                        }`}
+                    onClick={() => setSelectedConversation("Amit RG")}
+                >
+                    <div className="conversation-name">Amit RG</div>
+                    <div className="conversation-source">Facebook DM</div>
+                    <div className="conversation-message">Hey There! I probably did one of the best...</div>
+                    <div className="conversation-time">10m</div>
                 </div>
-                {mockConversations.map((conv) => (
-                    <div
-                        key={conv.id}
-                        className={`conversation-preview ${selected.id === conv.id ? "active" : ""}`}
-                        onClick={() => setSelected(conv)}
-                    >
-                        <div className="title-row">
-                            <strong>{conv.name}</strong>
-                            <span>{conv.time}</span>
-                        </div>
-                        <div className="type">{conv.type}</div>
-                        <p className="preview-msg">{conv.preview}</p>
-                    </div>
-                ))}
+
+                <div
+                    className={`conversation-item ${selectedConversation === "Hiten Saxena" ? "active" : ""
+                        }`}
+                    onClick={() => setSelectedConversation("Hiten Saxena")}
+                >
+                    <div className="conversation-name">Hiten Saxena</div>
+                    <div className="conversation-source">Facebook Post</div>
+                    <div className="conversation-message">Available in store?</div>
+                    <div className="conversation-time">10m</div>
+                </div>
             </div>
 
-            {/* Message & details */}
-            <div className="main-section">
-                <div className="chat-header">
-                    <h3>{selected.name}</h3>
-                </div>
+            {/* Chat Section */}
+            <div className="chat-section">
+                <div className="chat-header">{selectedConversation}</div>
                 <div className="chat-body">
-                    {selected.messages.map((msg, idx) => (
-                        <div key={idx} className={`chat-bubble ${msg.from === "agent" ? "agent" : "user"}`}>
-                            <div className="bubble-content">
-                                <p>{msg.text}</p>
-                                <span>{msg.name} - {msg.time}</span>
-                            </div>
-                            <img src={msg.avatar} alt="avatar" className="avatar" />
+                    <div className="chat-bubble user">
+                        <img
+                            src="https://randomuser.me/api/portraits/women/44.jpg"
+                            className="chat-avatar"
+                        />
+                        <div>
+                            <div className="bubble">Is it in stock right now?</div>
+                            <div className="chat-meta">Amit RG • Mar 05, 2:22 AM</div>
                         </div>
-                    ))}
+                    </div>
+
+                    <div className="chat-bubble agent">
+                        <img
+                            src="https://randomuser.me/api/portraits/men/75.jpg"
+                            className="chat-avatar"
+                        />
+                        <div>
+                            <div className="bubble">We've 3 left in stock!</div>
+                            <div className="chat-meta">Richard Panel • Mar 05, 2:22 AM</div>
+                        </div>
+                    </div>
+
+                    <div className="chat-bubble agent">
+                        <img
+                            src="https://randomuser.me/api/portraits/men/75.jpg"
+                            className="chat-avatar"
+                        />
+                        <div>
+                            <div className="bubble">
+                                If you order before 8PM we can ship it today.
+                            </div>
+                            <div className="chat-meta">Richard Panel • Mar 05, 2:22 AM</div>
+                        </div>
+                    </div>
                 </div>
                 <div className="chat-input">
                     <input
                         type="text"
-                        placeholder={`Message ${selected.name}`}
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
+                        placeholder={`Message ${selectedConversation}`}
                     />
                 </div>
             </div>
 
-            {/* Right panel */}
-            <div className="right-panel">
-                <img src={selected.avatar} alt="user" className="profile-pic" />
-                <h4>{selected.name}</h4>
-                <p className="status">● Offline</p>
-                <div className="btn-row">
-                    <button>📞 Call</button>
-                    <button>👤 Profile</button>
+            {/* Details Panel */}
+            <div className="details-panel">
+                <img
+                    src="https://randomuser.me/api/portraits/women/44.jpg"
+                    className="profile-pic"
+                />
+                <h4 className="profile-name">{selectedConversation}</h4>
+                <div className="profile-status">● Offline</div>
+
+                <div className="action-buttons">
+                    <button className="call-button">📞 Call</button>
+                    <button className="profile-button">👤 Profile</button>
                 </div>
-                <div className="customer-box">
-                    <p><strong>Email:</strong> {selected.email}</p>
-                    <p><strong>First Name:</strong> {selected.firstName}</p>
-                    <p><strong>Last Name:</strong> {selected.lastName}</p>
+
+                <div className="customer-details">
+                    <p>
+                        <strong>Email</strong><br />
+                        amit@richpanel.com
+                    </p>
+                    <p>
+                        <strong>First Name</strong><br />
+                        Amit
+                    </p>
+                    <p>
+                        <strong>Last Name</strong><br />
+                        RG
+                    </p>
                     <a href="#">View more details</a>
                 </div>
             </div>
