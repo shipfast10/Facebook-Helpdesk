@@ -31,29 +31,31 @@ function Login() {
     };
 
     return (
-        <div className="auth-wrapper">
-            <div className="auth-box">
-                <h2>Login to your account</h2>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <div className="checkbox-row">
-                    <input type="checkbox" id="remember" />
-                    <label htmlFor="remember">Remember Me</label>
+        <div className="auth-bg">
+            <div className="auth-wrapper">
+                <div className="auth-box">
+                    <h2>Login to your account</h2>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <div className="checkbox-row">
+                        <input type="checkbox" id="remember" />
+                        <label htmlFor="remember">Remember Me</label>
+                    </div>
+                    <button onClick={handleLogin}>Login</button>
+                    <p>
+                        New to MyApp? <Link to="/register">Sign Up</Link>
+                    </p>
                 </div>
-                <button onClick={handleLogin}>Login</button>
-                <p>
-                    New to MyApp? <Link to="/register">Sign Up</Link>
-                </p>
             </div>
         </div>
     );

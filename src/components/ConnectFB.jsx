@@ -5,33 +5,29 @@ function ConnectFB() {
     const [pageInfo, setPageInfo] = useState(null);
 
     useEffect(() => {
-        const loadFB = async () => {
-            // Prevent duplicate SDK loading
+        const loadFB = () => {
             if (document.getElementById("facebook-jssdk")) {
                 console.log("⚠️ FB SDK already in DOM");
+                setSdkReady(true);
                 return;
             }
 
-            // Manually create fb-root
             if (!document.getElementById("fb-root")) {
                 const root = document.createElement("div");
                 root.id = "fb-root";
                 document.body.appendChild(root);
             }
 
-            // Load SDK
             const script = document.createElement("script");
             script.id = "facebook-jssdk";
             script.src = "https://connect.facebook.net/en_US/sdk.js";
 
             script.onload = () => {
-                console.log("✅ SDK loaded");
-
                 try {
                     window.FB.init({
                         appId: "749418387435290",
                         cookie: true,
-                        xfbml: true,
+                        xfbml: false,
                         version: "v17.0",
                     });
                     console.log("✅ FB.init success");
@@ -47,24 +43,18 @@ function ConnectFB() {
         loadFB();
     }, []);
 
-
-
     const handleFBLogin = () => {
-        if (!window.FB) return alert("Facebook SDK not loaded yet");
-        if (!sdkReady) return alert("Facebook SDK not initialized");
+        if (!window.FB) return alert("❌ Facebook SDK not loaded yet");
+        if (!sdkReady) return alert("❌ Facebook SDK not initialized");
 
         window.FB.login(
             (response) => {
-                console.log("🔐 FB Login response:", response);
-
                 if (!response.authResponse) {
-                    alert("Facebook login failed.");
+                    alert("❌ Facebook login failed.");
                     return;
                 }
 
                 window.FB.api("/me/accounts", (res) => {
-                    console.log("📘 Page info:", res);
-
                     if (res.data && res.data.length > 0) {
                         const selectedPage = res.data[0];
                         setPageInfo(selectedPage);
@@ -82,28 +72,30 @@ function ConnectFB() {
                         })
                             .then((res) => res.json())
                             .then((data) => {
-                                console.log("✅ Connected to backend:", data);
                                 alert("✅ Connected to: " + selectedPage.name);
                             })
                             .catch((err) => {
-                                console.error("❌ Backend connect error", err);
-                                alert("Failed to connect to backend.");
+                                console.error("❌ Backend error", err);
+                                alert("❌ Failed to connect to backend.");
                             });
                     } else {
-                        alert("No pages found.");
+                        alert("❌ No pages found.");
                     }
                 });
             },
             {
-                scope: "pages_show_list,pages_messaging,email,public_profile,pages_read_engagement",
+                scope:
+                    "pages_show_list,pages_messaging,email,public_profile,pages_read_engagement",
             }
         );
     };
 
     const handleDisconnect = () => {
         setPageInfo(null);
-        fetch(`${import.meta.env.VITE_API_URL}/api/disconnect`, { method: "POST" });
-        alert("Disconnected");
+        fetch(`${import.meta.env.VITE_API_URL}/api/disconnect`, {
+            method: "POST",
+        });
+        alert("📴 Disconnected from Facebook.");
     };
 
     return (
