@@ -1,172 +1,166 @@
-/* Inbox.css */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f7f9fb;
+    color: #1c1e21;
+    /* Set default font color to dark gray */
+}
+
 .inbox-container {
     display: flex;
     height: 100vh;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f1f3f6;
 }
 
 .sidebar {
-    width: 280px;
+    width: 260px;
     background-color: #fff;
-    padding: 16px;
     border-right: 1px solid #ddd;
-    overflow-y: auto;
+    padding: 20px;
 }
 
 .sidebar h3 {
-    margin-bottom: 16px;
     font-size: 18px;
-    font-weight: bold;
-    color: #222;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1c1e21;
 }
 
 .conversation-item {
-    padding: 10px 12px;
-    border-radius: 8px;
+    padding: 12px;
     margin-bottom: 10px;
-    background-color: #f5f5f5;
+    border-radius: 10px;
     cursor: pointer;
+    background-color: #f0f4ff;
 }
 
-.conversation-item.active {
-    background-color: #e6eeff;
+.conversation-item.inactive {
+    background-color: #f7f9fb;
 }
 
-.conversation-name {
-    font-weight: 600;
-    margin-bottom: 2px;
+.conversation-item:hover {
+    background-color: #e4ebf5;
 }
 
-.conversation-subtitle {
+.conversation-item h4 {
+    font-size: 15px;
+    margin: 0;
+    color: #1c1e21;
+}
+
+.conversation-item span,
+.conversation-item p {
     font-size: 13px;
-    color: #555;
+    color: #4a4a4a;
 }
 
-.conversation-snippet {
-    font-size: 13px;
-    color: #999;
-}
-
-.message-panel {
+.chat-area {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background-color: #f9fafb;
+    background-color: #f7f9fb;
 }
 
-.message-header {
-    padding: 16px;
-    font-size: 18px;
-    font-weight: bold;
+.chat-header {
+    padding: 15px 20px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #1c1e21;
     border-bottom: 1px solid #ddd;
-    background-color: #fff;
 }
 
-.message-body {
-    padding: 20px;
+.chat-messages {
     flex: 1;
+    padding: 20px;
     overflow-y: auto;
 }
 
 .message {
-    max-width: 60%;
-    background: #fff;
-    padding: 12px;
+    background-color: #fff;
+    padding: 10px 15px;
     border-radius: 12px;
-    margin-bottom: 12px;
-    position: relative;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    max-width: 60%;
+    margin-bottom: 10px;
+    color: #1c1e21;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .message.agent {
-    align-self: flex-end;
-    background-color: #e3f2fd;
+    background-color: #e8f1ff;
+    margin-left: auto;
 }
 
-.message-meta {
-    font-size: 11px;
-    color: #888;
-    margin-top: 5px;
+.chat-input {
+    padding: 10px 20px;
+    border-top: 1px solid #ccc;
+    background: #fff;
 }
 
-.message-footer {
-    padding: 12px;
-    border-top: 1px solid #ddd;
-    background-color: #fff;
-}
-
-.message-footer input {
+.chat-input input {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 14px;
+    color: #1c1e21;
 }
 
-.info-panel {
-    width: 260px;
-    background-color: #f9fafc;
-    padding: 20px;
+.details-panel {
+    width: 280px;
+    background-color: #fff;
     border-left: 1px solid #ddd;
+    padding: 20px;
 }
 
-.profile-img {
+.details-panel .avatar {
     width: 64px;
     height: 64px;
     border-radius: 50%;
     object-fit: cover;
-    margin: 0 auto;
-    display: block;
+    margin-bottom: 10px;
 }
 
-.info-name {
-    text-align: center;
-    margin-top: 10px;
-    font-weight: bold;
-    color: #333;
+.details-panel h4 {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #1c1e21;
 }
 
-.info-status {
-    text-align: center;
+.details-panel small {
     color: #777;
-    font-size: 13px;
-    margin-bottom: 20px;
+    font-size: 12px;
 }
 
-.info-buttons {
+.details-panel .buttons {
     display: flex;
-    justify-content: center;
     gap: 10px;
-    margin-bottom: 20px;
+    margin: 15px 0;
 }
 
-.info-buttons button {
-    padding: 6px 12px;
-    font-size: 13px;
-    border: none;
-    border-radius: 6px;
+.details-panel .buttons button {
     background-color: #000;
-    color: #fff;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
     cursor: pointer;
-}
-
-.info-card {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 12px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-}
-
-.info-card p {
-    margin: 8px 0;
-    font-size: 14px;
-}
-
-.info-card a {
-    display: block;
-    margin-top: 8px;
     font-size: 13px;
-    color: #4c63b6;
+}
+
+.details-panel .info-card {
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.details-panel .info-card p {
+    font-size: 14px;
+    color: #1c1e21;
+    margin: 6px 0;
+}
+
+.details-panel .info-card a {
+    font-size: 13px;
+    color: #0053a0;
     text-decoration: none;
 }
